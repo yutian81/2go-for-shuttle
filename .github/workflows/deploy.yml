@@ -11,8 +11,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Check Trigger Event
         run: |
           echo "Workflow triggered by: ${{ github.event_name }}"
@@ -25,6 +23,9 @@ jobs:
             echo "工作流由计划任务触发，开始执行部署..."
           fi
           
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
